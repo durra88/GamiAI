@@ -1,0 +1,14 @@
+---
+description: Flutter secrets, logging, and secure storage
+globs: flutter_app/**
+alwaysApply: false
+---
+
+Never hardcode API keys, passwords, secrets, authentication tokens, or
+private credentials.
+
+Do not log sensitive information.
+Do not expose authentication tokens or personal data in logs.
+Use the project's established secure-storage and authentication mechanisms.
+Do not introduce custom cryptography when an established secure mechanism
+already exists.

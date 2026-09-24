@@ -1,0 +1,17 @@
+---
+description: Flutter package dependency rules
+globs: flutter_app/**
+alwaysApply: false
+---
+
+Before adding a package:
+
+1. Check whether Flutter/Dart already provides the required capability.
+2. Search the existing project for an existing solution.
+3. Prefer an existing dependency already used by the project.
+4. Avoid adding a dependency for a small utility that can safely be handled
+   with existing APIs.
+5. Do not introduce multiple packages solving the same problem.
+6. Explain why a new dependency is necessary before adding it.
+
+Do not introduce unnecessary packages.

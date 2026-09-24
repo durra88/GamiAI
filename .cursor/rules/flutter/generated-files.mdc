@@ -1,0 +1,16 @@
+---
+description: Flutter generated code must be regenerated, not hand-edited
+globs: flutter_app/**
+alwaysApply: false
+---
+
+Never manually edit generated files such as:
+
+*.g.dart
+*.freezed.dart
+
+When generated code needs to change, modify its source annotations/models
+and regenerate using the project's configured build_runner/code-generation
+process.
+
+Do not manually reproduce generated behavior.

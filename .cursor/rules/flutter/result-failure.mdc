@@ -1,0 +1,27 @@
+---
+description: Flutter Result and Failure error handling
+globs: flutter_app/**
+alwaysApply: false
+---
+
+Use the sealed Result<T> pattern:
+- Success<T>
+- FailureResult<T>
+
+Use the existing sealed Failure hierarchy defined in:
+packages/core/lib/src/domain/
+
+Never introduce:
+- dartz
+- Either
+- another competing Result pattern
+
+Repositories must never expose DioException or raw Dio Response objects.
+
+Map infrastructure/network errors to the appropriate Failure inside the
+repository implementation.
+
+Failures must carry a FailureCode enum rather than hardcoded English strings.
+
+Localized display messages for failures must be resolved in the presentation
+layer through intl/ARB files.

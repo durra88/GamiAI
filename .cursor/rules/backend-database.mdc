@@ -1,0 +1,23 @@
+---
+description: SQLAlchemy sessions, repositories, queries, and Alembic
+globs: backend/app/core/database.py,backend/**/models.py,backend/**/repository.py,backend/alembic/**/*.py
+alwaysApply: false
+---
+
+Use the session factory in `app/core/database.py`. Do not create engines or
+session factories inside modules. Async SQLAlchemy only. No synchronous
+session use in request handlers.
+
+One business operation has one transaction boundary. Do not commit from
+unrelated layers for the same operation. Do not hold a transaction across a
+slow external or model call.
+
+Repositories own queries and persistence mapping. Filter every
+organization-owned table by `organization_id` from the authenticated
+context.
+
+Load relationships intentionally. Avoid N+1 queries and extra round trips
+that the caller does not need.
+
+Schema changes go through Alembic. Do not edit models without a migration,
+and do not rewrite a migration that may already have been applied.

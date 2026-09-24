@@ -1,17 +1,12 @@
 ---
-description: Testing conventions
-globs: "**/test/**,**/tests/**"
+description: Flutter testing conventions
+globs: flutter_app/**/test/**
 alwaysApply: false
 ---
 
-Flutter: use flutter_test + mocktail + riverpod_test. Mock repositories at
-the provider boundary — never hit a real network in a test. Override
-providers via ProviderScope overrides, not global state mutation.
-
-Backend: use pytest. Unit test service.py by mocking repository.py.
-Integration tests for router.py use a test database (sqlite in-memory or a
-disposable test Postgres) — never run tests against a real staging/prod
-database or external API.
+Use flutter_test + mocktail + riverpod_test. Mock repositories at the
+provider boundary — never hit a real network in a test. Override providers
+via ProviderScope overrides, not global state mutation.
 
 Every new Failure subtype or FailureCode needs a corresponding equality/
 mapping test. Every new repository method needs a test proving transport

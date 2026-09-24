@@ -1,0 +1,18 @@
+---
+description: Flutter unit, widget, and regression testing
+globs: flutter_app/**
+alwaysApply: false
+---
+
+Business logic must be testable without Flutter widgets.
+
+Write unit tests for important use cases, repositories, business rules,
+validation, and data transformations.
+Write widget tests for important user-facing behavior.
+
+Before changing existing behavior, inspect existing tests, preserve valid
+coverage, and update tests when behavior intentionally changes.
+Do not remove or weaken tests simply to make implementation pass.
+
+For bug fixes, identify the root cause, add or update a regression test when
+practical, implement the smallest appropriate fix, and run relevant tests.

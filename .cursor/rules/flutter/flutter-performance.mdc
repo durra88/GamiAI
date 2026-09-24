@@ -1,0 +1,16 @@
+---
+description: Flutter widget rebuild and list performance
+globs: flutter_app/**
+alwaysApply: false
+---
+
+Avoid unnecessary Flutter widget rebuilds.
+Use const constructors whenever applicable.
+Keep expensive computations outside build().
+Do not perform asynchronous work directly inside build().
+Avoid rebuilding large widget trees when only a small section needs to update.
+
+For lists, use efficient builders and stable keys when appropriate.
+Do not optimize based on assumptions.
+When performance is a concern, use Flutter DevTools/profile data to identify
+the actual bottleneck before making significant optimization changes.

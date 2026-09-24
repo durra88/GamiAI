@@ -1,0 +1,29 @@
+---
+description: Flutter English and Arabic localization and RTL layout
+globs: flutter_app/**
+alwaysApply: false
+---
+
+The application must support English and Arabic.
+
+Every user-facing string must use the localization system.
+Never hardcode user-facing strings inside widgets or business logic.
+Use ARB files for English and Arabic.
+Localized display strings must remain in the presentation layer.
+
+Never assume an LTR layout.
+
+Use directional APIs where applicable:
+- EdgeInsetsDirectional
+- AlignmentDirectional
+- PositionedDirectional
+- start/end instead of left/right
+- directional icons where appropriate
+
+Do not use hardcoded left/right spacing for UI that needs RTL support.
+
+Do not concatenate localized strings when grammar or word order can differ
+between languages.
+
+Use proper localization APIs for dates, numbers, currency, pluralization,
+and formatted messages.

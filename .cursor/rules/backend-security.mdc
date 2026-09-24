@@ -1,0 +1,20 @@
+---
+description: Auth, tokens, secrets, and backend authorization
+globs: backend/app/core/security.py,backend/app/modules/identity/**/*.py
+alwaysApply: false
+---
+
+Authentication identifies the caller. Authorization decides what that caller
+may do. Backend checks are authoritative. Do not trust a role, permission,
+or `organization_id` supplied only by the client. Derive tenant scope from
+the authenticated session.
+
+Keep auth dependencies at the route boundary. Put the check close enough to
+the operation that another entry point cannot skip it.
+
+Use the helpers in `app/core/security.py` for password hashing and JWT
+issue/verify. Do not invent custom cryptography. Never put tokens or
+passwords in URLs or query parameters.
+
+Never log passwords, access tokens, refresh tokens, API keys, or sensitive
+personal data. Do not return those values in API errors.

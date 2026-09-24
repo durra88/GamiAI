@@ -1,0 +1,25 @@
+---
+description: AI provider isolation, prompts, and untrusted model output
+globs: backend/app/ai/**/*.py
+alwaysApply: false
+---
+
+Business modules call an AI application interface. They do not import
+OpenAI, Gemini, Anthropic, or other provider SDKs.
+
+Keep provider configuration, request formats, response parsing, and provider
+errors inside `app/ai/`. Map provider payloads into application types before
+they leave that boundary.
+
+Keep prompts and orchestration in the AI layer. Do not put prompts in
+FastAPI routers.
+
+Treat model output as untrusted input. Validate structured responses with
+typed schemas before a business workflow uses them. Do not let raw model
+text trigger a sensitive operation without validation and authorization.
+
+Handle timeouts, connection errors, invalid responses, and provider errors
+explicitly. Do not add retries unless the task requires them.
+
+Do not log prompts or responses that contain secrets, tokens, or sensitive
+personal data.

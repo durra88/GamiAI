@@ -1,0 +1,23 @@
+---
+description: Pytest isolation and behavior coverage for backend tests
+globs: backend/tests/**/*.py
+alwaysApply: false
+---
+
+Use pytest. Prefer the lowest test that proves the behavior:
+
+- Unit: service rules, with the repository mocked.
+- Integration: repository and database behavior on sqlite in-memory or a
+  disposable test Postgres.
+- API: validation, auth, and the response contract.
+
+Test behavior and failure paths. Do not add a test per tiny function when
+an existing higher-level test already covers it. Add a regression test for
+a bug fix when practical.
+
+Tests must be deterministic. Use fixtures, fakes, or mocks. Do not depend
+on machine state, test order, production databases, real external APIs,
+real model providers, or real credentials.
+
+Do not mock the unit under test. Do not delete or weaken a test to make an
+implementation pass.

@@ -1,0 +1,38 @@
+---
+description: Flutter presentation versus business-logic separation
+globs: flutter_app/**
+alwaysApply: false
+---
+
+Presentation code must not call repositories or Dio directly.
+
+Presentation should communicate through the established Riverpod
+providers/controllers/use cases.
+
+Widgets are responsible for presentation only.
+
+Do not place the following inside widgets:
+- API calls
+- repository calls
+- business rules
+- authentication logic
+- persistence logic
+- complex validation
+- business calculations
+- data transformation unrelated to presentation
+
+Do not put business logic inside build() methods.
+Do not perform network calls directly from widgets.
+
+Prefer small, focused widgets with one clear responsibility.
+
+Extract a widget when it has a meaningful responsibility, it improves
+readability, it is genuinely reused, or it isolates complex UI.
+Do not extract every few lines into a widget.
+
+Avoid deeply nested and unnecessarily large build methods.
+Prefer composition over inheritance for UI.
+
+Reusable widgets should not contain feature-specific business logic.
+Reusable widgets should expose meaningful parameters instead of knowing about
+specific feature implementations.

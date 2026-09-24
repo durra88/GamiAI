@@ -1,0 +1,115 @@
+---
+description: Flutter architecture, domain boundaries, feature isolation, and API mapping
+globs: flutter_app/**
+alwaysApply: false
+---
+
+Follow the existing project architecture and conventions before introducing
+new patterns.
+
+Prefer simple, maintainable, testable solutions over unnecessary abstraction
+or over-engineering.
+
+Understand the dependency and architecture boundaries before changing code.
+Do not introduce new architectural patterns without a clear reason.
+Follow existing naming and folder conventions.
+
+# Domain layer
+
+The domain layer under `lib/src/domain/` must remain pure Dart.
+
+Domain code must never import:
+- Flutter
+- Dio
+- json_annotation
+- platform plugins
+- UI-specific libraries
+- infrastructure-specific implementations
+
+The domain layer must not depend on presentation or infrastructure concerns.
+Business rules should remain independent from Flutter and external frameworks
+whenever possible.
+
+# Dependency direction
+
+Respect the existing Clean Architecture dependency direction.
+
+Presentation may depend on domain/application abstractions.
+Data may implement domain/application contracts.
+
+Domain must remain independent from Flutter, networking, persistence,
+platform APIs, and infrastructure.
+
+Do not invert dependency direction to make a local implementation easier.
+Keep infrastructure-specific details at the appropriate boundary.
+
+# Feature isolation
+
+Keep feature-specific widgets, models, providers, business logic,
+presentation logic, and utilities inside the feature unless they are
+genuinely shared.
+
+Do not move feature-specific code into core/common/shared packages merely to
+make the project appear cleaner.
+
+Shared code must not depend on feature-specific implementations.
+Avoid circular dependencies between features.
+
+Do not create new feature packages unless explicitly requested.
+Do not scaffold placeholder packages for future features.
+Do not create future features such as jobs, screening, etc. before they are
+actually required.
+
+Only introduce a new package when there is a real architectural or product
+requirement.
+
+# Functions and naming
+
+Functions should have one clear responsibility.
+Avoid large functions containing multiple unrelated responsibilities.
+
+Extract functions when extraction improves readability, testability,
+maintainability, or genuine reuse.
+Do not create trivial helper functions without a meaningful benefit.
+
+Prefer pure functions for calculations and transformations when possible.
+Business rules should be explicit, testable, and independent from UI code.
+
+Names should describe intent rather than implementation.
+Avoid vague names such as data, item, helper, manager, handler, service,
+common, or utils unless the name is genuinely appropriate.
+Prefer domain-specific and intention-revealing names.
+
+# API and data handling
+
+Keep API-specific models, serialization, and networking concerns inside the
+data/infrastructure layer.
+
+Do not expose Dio Response, DioException, HTTP-specific implementation
+details, or raw JSON outside the appropriate data boundary.
+
+Map DTO/API models into domain models at the appropriate boundary.
+Handle nullability and API failures explicitly.
+Do not allow API-specific implementation details to leak into domain logic.
+
+# Accessibility
+
+Interactive widgets should have appropriate semantics and accessible labels
+when their meaning is not obvious.
+Do not rely only on color to communicate important state.
+Maintain appropriate touch target sizes.
+UI should remain usable with text scaling and accessibility settings.
+
+# Decision rule
+
+When deciding where and how to implement something, prefer:
+
+1. Existing appropriate implementation
+2. Existing project pattern
+3. Small local implementation
+4. Focused reusable abstraction when justified
+5. New architecture/dependency only when genuinely necessary
+
+Prefer maintainability, readability, testability, justified reuse, clear
+separation of concerns, predictable architecture, and minimal unnecessary
+complexity.

@@ -1,0 +1,39 @@
+---
+description: Essential FastAPI architecture for almost every backend change
+globs: backend/**/*.py
+alwaysApply: true
+---
+
+Flow: Router → Service → Repository → Infrastructure/Database.
+
+Routers stay thin: request parsing, auth dependencies, status codes, and
+calling a service. No business rules, queries, external API calls, or AI
+provider calls in routers.
+
+Each `app/modules/<name>/` capability uses `models.py`, `schemas.py`,
+`repository.py`, `service.py`, `router.py`. Services call repositories.
+Query logic stays out of `service.py`. Business workflows stay out of
+`repository.py`.
+
+A module may import `app/core/` and its own files only. Cross-module work
+goes through an explicit public service or contract. No circular imports.
+`backend/tool/verify_architecture.py` enforces this.
+
+Raise domain exceptions from `app/core/exceptions.py` in services. Map them
+at the HTTP boundary to `{"code", "message", "details"}`. Do not return
+stack traces, ORM errors, provider errors, or secrets.
+
+Pydantic schemas are the API contract. Do not return SQLAlchemy models.
+Validate external input. Business rules that depend on application state
+belong in the service.
+
+Configuration comes from the project settings. Never hardcode secrets, API
+keys, passwords, tokens, or credentials.
+
+Before adding a helper, search for an existing one. Reuse the same
+responsibility. Do not add `utils.py`, `helpers.py`, `common.py`,
+`manager.py`, or `base_service.py` without a clear shared owner.
+
+Inspect the current module first. Follow existing patterns. Make the
+smallest correct change. Do not refactor unrelated code or add a dependency
+unless the task needs it. Do not scaffold new modules unless asked.

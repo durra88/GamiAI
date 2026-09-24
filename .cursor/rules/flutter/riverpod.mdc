@@ -1,0 +1,26 @@
+---
+description: Flutter Riverpod code-generation state management
+globs: flutter_app/**
+alwaysApply: false
+---
+
+Use Riverpod with code generation only:
+- riverpod_annotation
+- riverpod_generator
+
+Never suggest or introduce:
+- Bloc
+- Cubit
+- GetX
+- Provider-only state management
+- service locators such as get_it
+
+Follow the existing Riverpod patterns in the project.
+Use the appropriate Riverpod provider type for the responsibility.
+
+Do not put business logic inside widgets simply because Riverpod is available.
+Avoid unnecessary providers. A provider must have a clear responsibility.
+
+Keep presentation-specific state in the appropriate Riverpod layer.
+Use Riverpod's selective watching and ref.listen when only a small section
+needs to update.

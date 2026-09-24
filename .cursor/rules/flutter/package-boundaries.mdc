@@ -1,0 +1,21 @@
+---
+description: Flutter package public-API import boundaries
+globs: flutter_app/**
+alwaysApply: false
+---
+
+A package may only import another package's public API.
+
+Allowed:
+package_name.dart
+
+Not allowed:
+package_name/src/...
+
+Never bypass package public APIs by importing another package's internal
+implementation.
+
+flutter_app/tool/verify_architecture.dart enforces package boundaries.
+
+Run the architecture verification tool when relevant rather than assuming
+compliance.

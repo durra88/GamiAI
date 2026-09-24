@@ -1,0 +1,42 @@
+---
+description: Flutter change scope and implementation workflow
+globs: flutter_app/**
+alwaysApply: false
+---
+
+Only modify files required for the requested task.
+
+Do not perform unrelated refactoring.
+Do not rename or reorganize existing code unless required.
+
+If an unrelated architectural problem is discovered, report it.
+Do not silently refactor it.
+
+Prefer small, focused diffs over large refactors.
+Do not change working behavior unless the requested task requires it.
+Make the smallest appropriate change.
+
+Before changing code:
+1. Inspect the existing implementation.
+2. Search for similar widgets, functions, providers, repositories, utilities,
+   models, and patterns.
+3. Reuse existing implementations when appropriate.
+4. Identify the correct architecture layer and package boundaries.
+5. Create a short implementation plan for non-trivial changes.
+
+During implementation, follow the established architecture, keep changes
+focused, avoid unnecessary abstractions, and do not introduce unnecessary
+dependencies.
+
+After implementation:
+1. Review the changed files and diff.
+2. Check for duplicated code and unnecessary new widgets, functions, or utilities.
+3. Check architecture boundaries, package boundaries, and UI/business-logic separation.
+4. Check localization, RTL, and generated-code rules.
+5. Check whether new abstractions are actually justified.
+6. Run analyzer and relevant tests.
+7. Run architecture verification when applicable.
+8. Report remaining warnings, limitations, or assumptions.
+
+Never assume that generated code, tests, analyzer results, or architecture
+compliance are correct without verifying them.

@@ -1,0 +1,47 @@
+---
+description: Flutter reuse, duplication, and abstraction limits
+globs: flutter_app/**
+alwaysApply: false
+---
+
+Before creating a new widget, function, helper, utility, provider, model,
+service, or component, search the existing codebase for similar
+implementations first.
+
+Prefer this order:
+
+1. Reuse an existing appropriate implementation.
+2. Consolidate genuinely duplicated responsibility.
+3. Extract a focused reusable component when justified.
+4. Keep feature-specific code local when reuse is not justified.
+5. Avoid generic abstractions with unclear responsibility.
+
+Do not create a reusable widget or function simply because two pieces of code
+look visually similar.
+
+Extract code only when the responsibility, behavior, or semantics are
+genuinely shared.
+
+Avoid duplicated business logic, validation, formatting, API mapping,
+state-management logic, and multiple sources of truth.
+
+Do not create generic "Common", "Base", "Helper", or "Utils" components
+without a clear reusable responsibility.
+
+Avoid overly generic widgets with many flags or parameters supporting
+unrelated use cases.
+
+Prefer one clear source of truth.
+
+Do not create additional layers, interfaces, services, repositories, helpers,
+or widgets unless they provide a clear architectural or maintenance benefit.
+
+Do not extract code prematurely.
+A small piece of code used once does not automatically need an abstraction.
+
+A reusable abstraction should have a clear responsibility, a meaningful name,
+a stable API, a clear ownership, and a reasonable likelihood of reuse.
+
+Prefer simple focused abstractions over generic abstractions.
+Do not introduce architecture simply to make the folder structure appear
+more sophisticated.
