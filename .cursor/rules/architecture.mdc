@@ -1,0 +1,22 @@
+---
+description: Global architecture rules for the GamiAI monorepo
+alwaysApply: true
+---
+
+This is a monorepo with two independent codebases that never import each other:
+- flutter_app/ (Dart/Flutter)
+- backend/ (Python/FastAPI)
+
+They communicate ONLY over HTTP, contract defined in docs/api/openapi.yaml.
+Never suggest importing backend code from Flutter or vice versa.
+
+Before finishing any task, run `make verify` (or the scoped
+`make verify-flutter` / `make verify-backend`) and fix failures.
+Never mark a task done with a failing verify_architecture script.
+
+Do not add new top-level folders, rename existing ones, or restructure
+package/module boundaries without being explicitly asked to.
+
+When a rule here conflicts with a shortcut that would "just work" faster,
+follow the rule. These constraints exist because this is a long-lived,
+multi-developer-eventually, production system — not a prototype.

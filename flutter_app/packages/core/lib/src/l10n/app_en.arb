@@ -1,0 +1,9 @@
+{
+  "@@locale": "en",
+  "appTitle": "GamiAI",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "signIn": "Sign in",
+  "healthOk": "Healthy"
+}

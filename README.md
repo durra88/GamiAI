@@ -1,56 +1,28 @@
 # GamiAI
 
-Recruitment platform monorepo. Phase 0 contains the workspace tooling, the `core` package, and a runnable app shell.
+Phase 0 is the architecture skeleton: a Flutter workspace, a FastAPI app with `GET /health`, and checks that packages and modules do not import each other's internals.
 
 ## Requirements
 
-- Flutter 3.47.5 (stable) or newer on the 3.47 line
-- Dart 3.13.4, bundled with that Flutter SDK
+- Flutter 3.47.5 (stable), Dart 3.13.4
+- Python 3.14
 
-```sh
-flutter channel stable
-flutter upgrade
-```
-
-## Workspace
+## Layout
 
 | Path | Role |
 | --- | --- |
-| `packages/core` | Shared kernel: failures, HTTP, tokens, l10n, design system |
-| `app/` | Flutter app shell |
-| `docs/architecture` | Dependency rules |
-| `tool/verify_architecture.dart` | Fails if a package imports another package's `src/` |
+| `flutter_app/` | Melos workspace: `app` shell and `packages/core` |
+| `backend/` | FastAPI application |
+| `infrastructure/docker-compose.yml` | Postgres and Redis |
+| `docs/architecture/` | Overview and dependency rules |
 
-Melos 8 keeps scripts in the root `pubspec.yaml` under `melos:`.
-
-## Scripts
+## Commands
 
 ```sh
-dart run melos bootstrap
-dart run melos run analyze
-dart run melos run test
-dart run melos run format
-dart run melos run generate
-dart run melos run verify
+make setup
+make verify
+make verify-flutter
+make verify-backend
 ```
 
-`verify` runs a format check, analyzer, tests, and the architecture script, and stops at the first failure.
-
-## API configuration
-
-`EnvironmentConfig.fromDefines()` reads compile-time defines:
-
-- `APP_ENV` — `dev` (default), `staging`, or `prod`
-- `API_BASE_URL` — default `http://localhost:8080`
-
-```sh
-flutter run \
-  --dart-define=APP_ENV=dev \
-  --dart-define=API_BASE_URL=https://api.example.com
-```
-
-Logging is enabled only when `APP_ENV` is not `prod`, and `Authorization` values are redacted.
-
-## Dependency rules
-
-See [docs/architecture/dependency-rules.md](docs/architecture/dependency-rules.md). Import `package:core/core.dart` only. Do not import `package:core/src/...`.
+`make setup` runs `dart pub get` in `flutter_app/` and installs the backend into `backend/.venv`. `make verify` runs the Flutter format check, analyzer, and architecture script, then the backend architecture script and pytest.

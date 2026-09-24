@@ -1,0 +1,19 @@
+name: gamiai
+
+packages:
+  - app
+  - packages/**
+
+scripts:
+  bootstrap:
+    description: Resolve workspace dependencies.
+    run: dart pub get
+  analyze:
+    description: Analyze all Flutter packages.
+    run: dart run melos exec --fail-fast -- flutter analyze --fatal-infos
+  format:
+    description: Format Dart code.
+    run: dart format .
+  verify:
+    description: Format check, analyze, then architecture rules.
+    run: dart format --set-exit-if-changed . && dart run melos run analyze && dart tool/verify_architecture.dart
